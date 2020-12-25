@@ -1,8 +1,6 @@
 import React, { useCallback, useRef, useState } from 'react';
 import booksAPI from './services/books';
 
-const API_KEY = 'AIzaSyClUw246sxrG1f-qgBGLwkeD2EU8EQAu9E';
-
 const App = () => {
   const inputRef = useRef(null);
   const [books, setBooks] = useState([]);
@@ -12,7 +10,7 @@ const App = () => {
       e.preventDefault();
 
       const { data } = await booksAPI.get(
-        `/volumes?q=${inputRef.current.value}&key=${API_KEY}`,
+        `/volumes?q=${inputRef.current.value}&key=${process.env.REACT_APP_API_KEY}`,
       );
 
       setBooks(data.items);
