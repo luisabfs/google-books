@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const booksAPI = axios.create({
-  baseURL: 'https://www.googleapis.com/books/v1',
+  baseURL: 'https://www.skoob.com.br/search',
 });
 
 export default booksAPI;

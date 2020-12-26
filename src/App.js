@@ -10,10 +10,9 @@ const App = () => {
       e.preventDefault();
 
       const { data } = await booksAPI.get(
-        `/volumes?q=${inputRef.current.value}&key=${process.env.REACT_APP_API_KEY}`,
+        `/v1?q=${inputRef.current.value}&limit=40`,
       );
-
-      setBooks(data.items);
+      setBooks(data.results);
     },
     [inputRef],
   );
@@ -25,11 +24,26 @@ const App = () => {
         <button type="submit">Pesquisar</button>
       </form>
 
-      <ul>
+      <div
+        style={{
+          display: 'flex',
+          flex: 1,
+          flexWrap: 'wrap',
+        }}>
         {books.map((book) => (
-          <li>{book.volumeInfo.title}</li>
+          <div
+            key={book.id}
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              margin: 20,
+              width: 200,
+            }}>
+            <img src={book.img_url} alt="book" style={{ width: 100 }} />
+            <span>{book.titulo}</span>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
